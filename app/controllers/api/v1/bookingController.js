@@ -4,7 +4,7 @@ const bookingService = require("../../../services/bookingService")
 module.exports = {
     async addBooking(req,res){
         try{
-            if(flight_type.toLowerCase() != "round trip"){
+            if(req.body.flight_type.toLowerCase() != "round trip"){
                 if(req.body.user_id && req.body.schedule_id && req.body.origin_name && req.body.destination_name && req.body.plane_class && req.body.total_passenger && req.body.flight_type && req.body.price && req.body.flight_date && req.body.departure_hour && req.body.arrival_hour && req.body.passenger_name && req.body.phone_number){
                     const origin_airport = await airportService.findAirport(req.body.origin_name)
                     const destination_airport = await airportService.findAirport(req.body.destination_name)

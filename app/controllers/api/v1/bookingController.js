@@ -21,7 +21,7 @@ module.exports = {
                         total_passenger : req.body.total_passenger,
                         flight_type : req.body.flight_type,
                         flight_date : req.body.flight_date,
-                        flight_back_date : "00-00-0000",
+                        flight_back_date : null,
                         airline_name : "Tripie Airline",
                         departure_hour : req.body.departure_hour,
                         arrival_hour : req.body.arrival_hour,

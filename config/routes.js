@@ -25,7 +25,7 @@ const handleUploadImageCloudinary = (req, res) => {
     const fileBase64 = req.file.buffer.toString("base64")
     const file = `data:${req.file.mimetype};base64,${fileBase64}`
 
-    cloudinary.uploader.upload(file, (err, result) => {
+    cloudinary.uploader.upload(file, {folder: "photo-profile"}, (err, result) => {
         if(!!err){
             console.log(err)
             return res.status(400).json({
@@ -48,7 +48,7 @@ apiRouter.use(cors());
 apiRouter.post('/register', controllers.api.v1.authController.CheckAvailableEmail, controllers.api.v1.authController.RegisterUser)
 apiRouter.post('/login', controllers.api.v1.authController.login)
 // apiRouter.put('/user/:id/update', multer({storage:storage}).single("photo_profile"), controllers.api.v1.authController.updateUser)
-apiRouter.put('/user/:id/update', controllers.api.v1.authController.getUserById, uploadOnMemory.single("picture"), controllers.api.v1.authController.uploadProfilePhoto, controllers.api.v1.authController.updateUser)
+apiRouter.put('/user/:id/update', controllers.api.v1.authController.getUserById, uploadOnMemory.single("Foto"), controllers.api.v1.authController.uploadProfilePhoto, controllers.api.v1.authController.updateUser)
 apiRouter.post('/upload-gambar', uploadOnMemory.single("picture"), handleUploadImageCloudinary)
 
 apiRouter.get("/api/v1/whoami",

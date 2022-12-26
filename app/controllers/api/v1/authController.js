@@ -219,10 +219,15 @@ module.exports = {
 
     async uploadProfilePhoto(req, res, next){
         if(req.file != undefined){
+            const oldPhoto = req.user.Foto
+            const getIdPhoto = oldPhoto.split("/").pop().split(".")[0];
+            console.log(getIdPhoto)
+            await cloudinary.uploader.destroy(`photo-profile/${getIdPhoto}`)
+
             const fileBase64 = req.file.buffer.toString("base64")
             const file = `data:${req.file.mimetype};base64,${fileBase64}`
     
-            cloudinary.uploader.upload(file, (err, result) => {
+            cloudinary.uploader.upload(file, {folder: "photo-profile"},(err, result) => {
                 if(!!err){
                     console.log(err)
                     return res.status(400).json({

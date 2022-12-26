@@ -39,7 +39,7 @@ module.exports={
     },
     async updateSchedules(req,res){
         try{
-            if(req.body.origin_name && req.body.destination_name && req.body.plane_class && req.body.price && req.body.flight_date && req.body.departure_hour && req.body.arrival_hour && req.body.capacity){
+            if(req.body.origin_name && req.body.destination_name && req.body.plane_class && req.body.price && req.body.flight_date && req.body.departure_hour && req.body.arrival_hour){
                 const origin_airport = await airportService.findAirport(req.body.origin_name)
                 const destination_airport = await airportService.findAirport(req.body.destination_name)
                 const tambah ={
@@ -55,7 +55,6 @@ module.exports={
                     departure_hour : req.body.departure_hour,
                     arrival_hour : req.body.arrival_hour,
                     price : req.body.price,
-                    capacity : req.body.capacity
                 }
                 const schedule = await scheduleService.updateSchedule(req.params.id, tambah)
                 res.status(200).json({

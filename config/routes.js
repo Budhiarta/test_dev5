@@ -40,9 +40,23 @@ const handleUploadImageCloudinary = (req, res) => {
     })
 }
 
+const corsOps = {
+    origin: '*',
+
+    methods: [
+        'GET',
+        'POST',
+        'PUT',
+        'DELETE'
+    ],
+
+    allowedHeaders: [
+        'Content-Type'
+    ]
+}
 
 apiRouter.use(express.json());
-apiRouter.use(cors());
+apiRouter.use(cors(corsOps));
 
 //Umum access
 apiRouter.post('/register', controllers.api.v1.authController.CheckAvailableEmail, controllers.api.v1.authController.RegisterUser)

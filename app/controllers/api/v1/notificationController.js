@@ -5,7 +5,7 @@ module.exports = {
         try{
             await notificationService.findNotification(req.params.id)
             .then(({data}) => {
-                if(data != null){
+                if(data != null && data != undefined && data != ''){
                     res.status(200).json({
                         status: "OK",
                         data: data

@@ -5,17 +5,17 @@ module.exports = {
         try{
             await notificationService.findNotification(req.params.id)
             .then(({data}) => {
-                if(data != null && data != undefined && data != ''){
+                if(data == null && data == undefined && data == ''){
+                    return res.status(404).json({
+                        status: "FAIL",
+                        message: "Belum Ada Notifikasi"
+                    }) 
+                }else{
                     res.status(200).json({
                         status: "OK",
                         data: data
                     })
                     next()
-                }else{
-                   return res.status(404).json({
-                        status: "FAIL",
-                        message: "Belum Ada Notifikasi"
-                    }) 
                 }
             })
         }catch(err){

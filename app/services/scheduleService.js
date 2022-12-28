@@ -20,14 +20,7 @@ module.exports={
     async findschedule(requestBody){
         try{
             const filter = await scheduleRepository.findSchedule(requestBody)
-            if(filter == null || filter == undefined || filter == ""){
-                return{
-                    status: "Fail",
-                    message : "Data tidak ditemukan"
-                }
-            }else{
-                return filter
-            }
+            return filter
         }catch(err){
             throw err
         }

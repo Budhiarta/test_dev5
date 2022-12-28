@@ -1,6 +1,6 @@
 const axios = require("axios");
 const jwt = require("jsonwebtoken");
-const { User } = require("../../../models");
+const userService = require("../../../services/userService");
 const { OAuth2Client } = require("google-auth-library")
 const { JWT_SECRET_KEY = "Rahasia" } = process.env;
 const client = new OAuth2Client(process.env.REACT_APP_GOOGLE_CLIENT_ID)
@@ -8,7 +8,7 @@ const client = new OAuth2Client(process.env.REACT_APP_GOOGLE_CLIENT_ID)
 function createToken(user) {
     const payload = {
       id: user.id,
-      email: user.email,
+      email: user.Email,
     };
   
     return jwt.sign(payload, JWT_SECRET_KEY);
@@ -24,11 +24,12 @@ async function handleGoogleLoginOrRegister(req, res) {
     })
   
     const { email,name } = ticket.getPayload();
+    const role = "Member";
   
     console.log(ticket.getPayload())
   
-    let user = await User.findOne({ where: { email: email } });
-    if (!user) user = await User.create({ email, name });
+    let user = await userService.findByEmail(email);
+    if (!user) user = await userService.create({ email, name, role });
   
     const accessToken = createToken(user);
   

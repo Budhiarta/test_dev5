@@ -2,7 +2,7 @@ const airportService = require("../../../services/airportService")
 const bookingService = require("../../../services/bookingService")
 
 module.exports = {
-    async addBooking(req,res){
+    async addBooking(req,res, next){
         try{
             if(req.body.flight_type.toLowerCase() != "round trip"){
                 if(req.body.user_id && req.body.schedule_id && req.body.origin_name && req.body.destination_name && req.body.plane_class && req.body.total_passenger && req.body.flight_type && req.body.price && req.body.flight_date && req.body.departure_hour && req.body.arrival_hour && req.body.passenger_name && req.body.phone_number){
@@ -35,8 +35,9 @@ module.exports = {
                         message: "Berhasil Menambahkan Data",
                         data: booking
                     })
+                    next()
                 }else{
-                    res.status(400).json({
+                    return res.status(400).json({
                         status: "FAIL",
                         message: "Terdapat Form Yang Kosong!"
                     })
@@ -72,15 +73,16 @@ module.exports = {
                         message: "Berhasil Menambahkan Data",
                         data: booking
                     })
+                    next()
                 }else{
-                    res.status(400).json({
+                    return res.status(400).json({
                         status: "FAIL",
                         message: "Terdapat Form Yang Kosong!"
                     })
                 }
             }
         }catch(err){
-            res.status(400).json({
+            return res.status(400).json({
                 error: err
             })
         }

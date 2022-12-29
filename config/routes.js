@@ -51,7 +51,8 @@ const corsOps = {
     ],
 
     allowedHeaders: [
-        'Content-Type'
+        'Content-Type',
+        'Authorization'
     ]
 }
 

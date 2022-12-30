@@ -53,7 +53,7 @@ app.use(cors(corsOps));
 
 //Umum access
 apiRouter.post('/register', controllers.api.v1.authController.CheckAvailableEmail, controllers.api.v1.authController.RegisterUser)
-apiRouter.post('/login', controllers.api.v1.authController.login)
+apiRouter.post('/login', cors(corsOps), controllers.api.v1.authController.login)
 // apiRouter.put('/user/:id/update', multer({storage:storage}).single("photo_profile"), controllers.api.v1.authController.updateUser)
 apiRouter.put('/user/:id/update', controllers.api.v1.authController.getUserById, uploadOnMemory.single("Foto"), controllers.api.v1.authController.uploadProfilePhoto, controllers.api.v1.authController.updateUser)
 apiRouter.post('/upload-gambar', uploadOnMemory.single("picture"), handleUploadImageCloudinary)

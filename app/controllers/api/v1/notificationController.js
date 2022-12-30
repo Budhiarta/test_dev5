@@ -41,12 +41,6 @@ module.exports = {
             const notif = await notificationService.updateNotification(req.params.id,{
                 status: "read"
             })
-            if(notif == 0){
-                return res.status(403).json({
-                    status: "FAIL",
-                    message: "Gagal Merubah Notif"
-                })
-            }
         }catch(err){
             return res.status(401).json({
                 status: "ERROR",

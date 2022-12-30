@@ -5,7 +5,7 @@ module.exports = {
         try{
             await notificationService.findNotification(req.params.id)
             .then(({data}) => {
-                if(data == null && data == undefined && data == ''){
+                if(data == null || data == undefined || data == ''){
                     return res.status(404).json({
                         status: "FAIL",
                         message: "Belum Ada Notifikasi"
@@ -38,7 +38,7 @@ module.exports = {
     },
     async updateNotif(req, res){
         try{
-            const notif = await notificationService.updateNotification(req.params.id,{
+            await notificationService.updateNotification(req.params.id,{
                 status: "read"
             })
         }catch(err){

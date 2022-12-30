@@ -41,19 +41,19 @@ const handleUploadImageCloudinary = (req, res) => {
 }
 
 const corsOps = {
-    origin: '*',
+    origin: '*'
 
-    methods: [
-        'GET',
-        'POST',
-        'PUT',
-        'DELETE'
-    ],
+    // methods: [
+    //     'GET',
+    //     'POST',
+    //     'PUT',
+    //     'DELETE'
+    // ],
 
-    allowedHeaders: [
-        'Content-Type',
-        'Authorization'
-    ]
+    // allowedHeaders: [
+    //     'Content-Type',
+    //     'Authorization'
+    // ]
 }
 
 apiRouter.use(express.json());

@@ -3,7 +3,7 @@ const controllers = require("../app/controllers");
 const apiRouter = express.Router();
 const multer = require('multer');
 const path = require('path');
-const cors = require('cors');
+// const cors = require('cors');
 const handleGoogleLoginOrRegister = require("../app/controllers/api/v1/handleGoogleLoginOrRegister")
 const cloudinary = require('./cloudinary')
 const uploadOnMemory = require('./uploadOnMemory')
@@ -40,8 +40,8 @@ const handleUploadImageCloudinary = (req, res) => {
     })
 }
 
-const corsOps = {
-    origin: '*'
+// const corsOps = {
+//     origin: '*'
 
     // methods: [
     //     'GET',
@@ -54,10 +54,10 @@ const corsOps = {
     //     'Content-Type',
     //     'Authorization'
     // ]
-}
+// }
 
 apiRouter.use(express.json());
-apiRouter.use(cors(corsOps));
+// apiRouter.use(cors(corsOps));
 
 //Umum access
 apiRouter.post('/register', controllers.api.v1.authController.CheckAvailableEmail, controllers.api.v1.authController.RegisterUser)

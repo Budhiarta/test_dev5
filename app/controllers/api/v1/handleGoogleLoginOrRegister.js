@@ -9,6 +9,8 @@ function createToken(user) {
     const payload = {
       id: user.id,
       email: user.Email,
+      name: user.Name,
+      role: user.Role
     };
   
     return jwt.sign(payload, JWT_SECRET_KEY);
@@ -29,7 +31,7 @@ async function handleGoogleLoginOrRegister(req, res) {
     console.log(ticket.getPayload())
   
     let user = await userService.findByEmail(email);
-    if (!user) user = await userService.create({ email, name, role });
+    if (!user) user = await userService.create({ Email: email, Name: name, Role: role });
   
     const accessToken = createToken(user);
   

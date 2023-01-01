@@ -22,7 +22,7 @@ async function handleGoogleLoginOrRegister(req, res) {
   try {
     const ticket = await client.verifyIdToken({
       idToken: token,
-      audience: process.env.REACT_APP_GOOGLE_CLIENT_ID
+      audience : [process.env.react_app, process.env.android.client]
     })
   
     const { email,name } = ticket.getPayload();

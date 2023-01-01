@@ -37,7 +37,9 @@ async function handleGoogleLoginOrRegister(req, res) {
     const accessToken = createToken(user);
   
     res.status(201).json({ accessToken });
-  } catch {
+  } catch (err) {
+    res.status(401).json({ error: { name: err.name, message: err.message } });
+  } finally {
     const ticket = await client_2.verifyIdToken({
       idToken: token,
       audience : [process.env.REACT_APP_GOOGLE_CLIENT_ID, process.env.ANDROID_CLIENT_ID]
@@ -54,8 +56,6 @@ async function handleGoogleLoginOrRegister(req, res) {
     const accessToken = createToken(user);
   
     res.status(201).json({ accessToken });
-  } finally {
-    res.status(401).json({ error: { name: err.name, message: err.message } });
   }
 }
 

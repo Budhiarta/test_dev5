@@ -5,6 +5,7 @@ const multer = require('multer');
 const path = require('path');
 const cors = require('cors');
 const handleGoogleLoginOrRegister = require("../app/controllers/api/v1/handleGoogleLoginOrRegister")
+const androHandleGoogleLoginOrRegister = require("../app/controllers/api/v1/androHandleGoogleLoginOrRegister")
 const cloudinary = require('./cloudinary')
 const uploadOnMemory = require('./uploadOnMemory')
 
@@ -67,6 +68,7 @@ apiRouter.get("/api/v1/whoami",
 )
 apiRouter.get('/user/:id', controllers.api.v1.authController.show)
 apiRouter.post("/api/v1/google", handleGoogleLoginOrRegister);
+apiRouter.post("/api/v1/google-andro", androHandleGoogleLoginOrRegister);
 
 //yang bisa diakses user//
 apiRouter.post('/search-ticket', controllers.api.v1.schedController.filterSchedule),

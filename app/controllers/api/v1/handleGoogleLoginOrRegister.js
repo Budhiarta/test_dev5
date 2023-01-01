@@ -23,7 +23,7 @@ async function handleGoogleLoginOrRegister(req, res) {
   try {
     const ticket = await client.verifyIdToken({
       idToken: token,
-      audience : [process.env.REACT_APP_GOOGLE_CLIENT_ID, process.env.ANDROID_CLIENT_ID]
+      audience : process.env.REACT_APP_GOOGLE_CLIENT_ID
     })
   
     const { email,name } = ticket.getPayload();
@@ -39,10 +39,16 @@ async function handleGoogleLoginOrRegister(req, res) {
     res.status(201).json({ accessToken });
   } catch (err) {
     res.status(401).json({ error: { name: err.name, message: err.message } });
-  } finally {
+  } 
+}
+
+async function androHandleGoogleLoginOrRegister(req, res) {
+  const { token } = req.body;
+  
+  try {
     const ticket = await client_2.verifyIdToken({
       idToken: token,
-      audience : [process.env.REACT_APP_GOOGLE_CLIENT_ID, process.env.ANDROID_CLIENT_ID]
+      audience : process.env.ANDROID_CLIENT_ID
     })
   
     const { email,name } = ticket.getPayload();
@@ -56,7 +62,14 @@ async function handleGoogleLoginOrRegister(req, res) {
     const accessToken = createToken(user);
   
     res.status(201).json({ accessToken });
-  }
+  } catch (err) {
+    res.status(401).json({ error: { name: err.name, message: err.message } });
+  } 
 }
 
-module.exports = handleGoogleLoginOrRegister;
+
+
+module.exports = {
+handleGoogleLoginOrRegister,
+androHandleGoogleLoginOrRegister
+}
